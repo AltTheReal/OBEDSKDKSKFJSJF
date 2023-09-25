@@ -79,7 +79,7 @@ while true do
                 print("STOP CRACKING")
                 
                 -- Kick the player with a message
-                game.Players.LocalPlayer:Kick("You have been kicked for using forbidden keywords.")
+                game.Players.LocalPlayer:Kick("Stop Cracking Kiddo I Know Where You Live")
                 return -- Exit the loop after kicking the player
             end
         end
