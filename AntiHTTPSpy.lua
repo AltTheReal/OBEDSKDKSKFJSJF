@@ -136,8 +136,8 @@ end
 
 local heartbeatConnection
 
-local cooldown = 0.1 -- Set your desired cooldown in seconds
-local cooldownTimer = 0
+local cooldown = -10 -- Set your desired cooldown in seconds
+local cooldownTimer = -10
 
 heartbeatConnection = RunService.Heartbeat:Connect(function()
     if not cooldownTimer or tick() - cooldownTimer >= cooldown then
